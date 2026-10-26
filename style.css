@@ -11,6 +11,7 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        scroll-behavior: smooth;
     }
 
     body {
@@ -427,4 +428,313 @@
         height: 100%;
         z-index: -1;
         pointer-events: none;
+    }
+
+    /* Nawigacja stron */
+    .main-nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px 22px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(8px);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-link.active {
+        background: #ffffff;
+        color: var(--bg-color-dark);
+        border-color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Subpage: Zadania z podręcznika */
+    .tasks-container {
+        max-width: 950px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+
+    /* Karta zadania */
+    .task-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+        padding: 30px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+        scroll-margin-top: 30px;
+        transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .task-card:hover {
+        border-color: rgba(255, 255, 255, 0.55);
+    }
+
+    .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+        border-bottom: 1px solid var(--card-border);
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+    }
+
+    .task-title-group h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #ffffff;
+        margin-bottom: 6px;
+    }
+
+    .task-subtitle {
+        font-size: 0.95rem;
+        opacity: 0.85;
+    }
+
+    .task-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .badge {
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .badge-book {
+        background: #118ab2;
+        color: #ffffff;
+    }
+
+    /* Treść zadania */
+    .task-statement {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 8px;
+        padding: 18px 22px;
+        margin-bottom: 24px;
+    }
+
+    .task-statement h4 {
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        color: #e0f2fe;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .task-statement p {
+        font-size: 0.98rem;
+        line-height: 1.6;
+        font-style: italic;
+    }
+
+    /* Tłumaczenie działania algorytmu */
+    .task-explanation {
+        margin-bottom: 26px;
+    }
+
+    .task-explanation h4 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        color: #a5f3fc;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .task-explanation p {
+        font-size: 0.92rem;
+        line-height: 1.7;
+        margin-bottom: 12px;
+        opacity: 0.95;
+    }
+
+    .explanation-points {
+        list-style: none;
+        padding-left: 0;
+        margin: 14px 0;
+    }
+
+    .explanation-points li {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 8px;
+        padding-left: 24px;
+        position: relative;
+    }
+
+    .explanation-points li::before {
+        content: '>';
+        position: absolute;
+        left: 0;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .complexity-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .complexity-box {
+        display: block;
+        background: rgba(0, 0, 0, 0.25);
+        padding: 8px 14px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        line-height: 1.5;
+    }
+
+    /* Sekcja kodu z zakładkami */
+    .code-section {
+        margin-top: 20px;
+    }
+
+    .code-tabs-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .tab-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .tab-btn {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--card-border);
+        border-bottom: none;
+        color: #ffffff;
+        padding: 8px 16px;
+        border-radius: 8px 8px 0 0;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+        background: #1e1e1e;
+        border-color: rgba(255, 255, 255, 0.4);
+        color: #38bdf8;
+    }
+
+    .code-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .action-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        padding: 6px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+        background: #ffffff;
+        color: #07477a;
+    }
+
+    .code-box {
+        background: #1e1e1e;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 0 8px 8px 8px;
+        padding: 16px;
+        overflow-x: auto;
+        position: relative;
+    }
+
+    .code-box pre {
+        margin: 0;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        color: #d4d4d4;
+    }
+
+    .code-pane {
+        display: none;
+    }
+
+    .code-pane.active {
+        display: block;
+    }
+
+    /* Przycisk powrotu na górę */
+    .back-to-top {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .back-to-top a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: background 0.2s;
+    }
+
+    .back-to-top a:hover {
+        background: rgba(255, 255, 255, 0.25);
     }

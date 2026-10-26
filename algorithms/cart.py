@@ -32,3 +32,22 @@ osoba2 = {"wiek": 42, "dochod": 7500}
 
 print("Osoba 1:", przewiduj(drzewo, osoba1))
 print("Osoba 2:", przewiduj(drzewo, osoba2))
+
+#Ten kod to klasyczne drzewo decyzyjne, 
+# które działa dokładnie jak formularz 
+# z pytaniami „TAK / NIE”: zaczynając od samej góry
+#  (korzenia), algorytm sprawdza konkretną cechę osoby
+#  (np. czy wiek wynosi co najwyżej 30 lat)
+#  i jeśli warunek jest spełniony, skręca w lewą gałąź,
+#  a jeśli nie – w prawą, powtarzając ten proces
+#  rekurencyjnie na kolejnych pytaniach (węzłach Node)
+#  tak długo, aż dotrze do ślepego zaułka bez pytań
+#  (liścia z polem decyzja), gdzie odczytuje gotowy
+#  wynik — dlatego Osoba 1 (wiek 25) natychmiast 
+# wpada w lewą odnogę i dostaje etykietę
+#  „Grupa A: Młody użytkownik”, podczas gdy
+#  Osoba 2 (wiek 42) idzie najpierw w prawo
+#  (bo wiek > 30), tam trafia na drugie pytanie o dochód
+#  (czy dochód $\le$ 5000) i z zarobkami 7500 ponownie 
+# skręca w prawo, lądując ostatecznie w „Grupa B: Wysokie
+#  dochody”.

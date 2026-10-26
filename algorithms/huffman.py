@@ -38,3 +38,16 @@ print("Tekst:", tekst)
 print("Kody Huffmana:")
 for char, kod in kody.items():
     print(f"  '{char}': {kod}")
+
+#Kodowanie Huffmana działa jak sprytne pakowanie walizki:
+#  najpierw zlicza, jak często każda litera pojawia się
+#  w tekście, a następnie w pętli łączy ze sobą dwie
+#  najrzadziej występujące litery w pary, przypisując
+#  jednej z nich bit 0, a drugiej 1 i sumując ich wagi
+#  w nowy wspólny węzeł, powtarzając to łączenie od dołu
+#  do samej góry, aż powstanie jedno wielkie drzewo
+#  — dzięki temu litery powtarzające się najczęściej dostają
+#  najkrótsze możliwe kody zero-jedynkowe (np. 1–2 bity),
+#  a litery rzadkie kody dłuższe, co pozwala bezstratnie
+#  skompresować cały tekst tak, by zajmował jak najmniej
+#  miejsca w pamięci.

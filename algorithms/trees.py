@@ -42,3 +42,16 @@ print("Wstawiono elementy:", elementy)
 print("In-order (posortowane):", inorder(root))
 print("Czy 15 jest w drzewie?:", szukaj(root, 15))
 print("Czy 99 jest w drzewie?:", szukaj(root, 99))
+
+#Binarne Drzewo Poszukiwań (BST) działa jak idealnie
+#  posegregowany regał według jednej żelaznej zasady:
+#  mniejsze wartości odkładasz zawsze na lewo,
+#  a większe na prawo — dzięki temu nowa liczba
+#  przy wstawianiu natychmiast wie, w którą odnogę 
+# skręcić, wyszukiwanie (np. liczby 15 lub 99) jest
+#  błyskawiczne, bo przy każdym porównaniu z węzłem 
+# odrzucasz od razu połowę pozostałych elementów, 
+# a odczytanie drzewa w kolejności „lewy $\rightarrow$
+#  środek $\rightarrow$ prawy” (inorder) z automatu 
+# wypisuje wszystkie liczby posortowane idealnie rosnąco
+#  ([5, 10, 15, 20, 30]).

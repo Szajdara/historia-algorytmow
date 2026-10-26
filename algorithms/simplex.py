@@ -51,3 +51,22 @@ def simplex_dydaktyczny():
     print(f"Maksymalny zysk Z = {round(zysk, 2)}")
 
 simplex_dydaktyczny()
+
+#Algorytm Simplex działa jak wspinaczka po narożnikach
+#  ogrodzonej działki w poszukiwaniu najwyższego punktu:
+#  zamienia ograniczenia produkcyjne 
+# (np. limity surowców i czasu) na równania z dodatkowymi
+#  „luzami” ($s_1, s_2, s_3$) i zapisuje je w tabeli,
+#  po czym w każdej rundzie sprawdza wiersz zysku,
+#  by wybrać towar dający najszybszy zarobek
+#  (najbardziej ujemna liczba w ostatnim wierszu wskazuje
+#  kolumnę pivota, na start zmienną $y$), następnie przez
+#  dzielenie zasobów (RHS) wybiera „wąskie gardło”,
+#  które skończy się najszybciej (najmniejszy iloraz
+#  wyznacza wiersz pivota), a potem metodą operacji 
+# na wierszach (eliminacja Gaussa) przeskakuje do tego 
+# nowego, lepszego wierzchołka; powtarza te przeskoki 
+# tak długo, aż w dolnym wierszu nie ma już żadnych 
+# ujemnych liczb — co oznacza, że żaden ruch nie przyniesie
+#  już większego zysku i osiągnięto absolutne maksimum 
+# (tutaj $x=2, y=6$, dające zysk $Z=36$).

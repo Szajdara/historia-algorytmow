@@ -32,3 +32,16 @@ graf = {
 }
 
 print("Najkrótszy koszt:", dijkstra(graf, 'A', 'E'))
+
+#Ten program szuka najtańszej trasy z miasta A do E:
+#  zaczyna z zerowym kosztem w A, a dla reszty miast
+#  zakłada na start koszt nieskończony, 
+# po czym w każdym kroku wybiera to miejsce, 
+# do którego potrafi dotrzeć najtaniej, 
+# sprawdza drogi do jego bezpośrednich sąsiadów 
+# i jeśli odkryje tańszy dojazd niż dotychczas zapisany,
+#  aktualizuje wynik i wrzuca sąsiada na listę
+#  do odwiedzenia — dzięki temu bada trasy w kolejności 
+# od najkrótszych i w momencie, gdy z listy zdejmie cel E,
+#  ma stuprocentową pewność, że znalazł optymalną ścieżkę
+#  (zwracając ostatecznie najniższy możliwy koszt równy 10).

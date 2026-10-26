@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Zadań z podręcznika – Informatyka na Czasie 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteka Skulpt do uruchamiania kodu Python w przeglądarce -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+
+<body>
+
+    <canvas id="confetti"></canvas>
+
+    <header>
+        <h1>10 Zadań z podręcznika</h1>
+        <h2>Informatyka na czasie 2 – Zakres rozszerzony (Nowa Era)</h2>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link"> Oś czasu historii</a>
+            <a href="zadania.html" class="nav-link active"> Zadania z podręcznika (10 algorytmów)</a>
+        </nav>
+    </header>
+
+    <section class="intro-section">
+        <div class="intro-box">
+            <h3>O WYBRANYCH ALGORYTMACH</h3>
+            <p>Poniżej znajduje się zestawienie <strong>10 przystępnych i fundamentalnych zadań algorytmicznych</strong> pochodzących bezpośrednio z oficjalnego podręcznika dla liceum i technikum <em>„Informatyka na czasie 2. Zakres rozszerzony”</em> (autorzy: Janusz Mazur, Paweł Perekietka, Zbigniew Talaga, Janusz S. Wierzbicki). Każde zadanie zawiera dokładne namiary w podręczniku, pełną treść, kod w C++ (z podręcznika) oraz w Pythonie, a także szczegółowe omówienie zasady działania.</p>
+        </div>
+        <div class="intro-box">
+            <h3>INTERAKTYWNOŚĆ</h3>
+            <p>Każdy z 10 algorytmów możesz nie tylko przeanalizować, ale także uruchomić wprost w przeglądarce za pomocą przycisku <strong>„Wypróbuj w edytorze”</strong> zintegrowanego z silnikiem <em>Skulpt</em>. Możesz modyfikować parametry wejściowe i sprawdzać rezultaty w czasie rzeczywistym bez instalowania żadnego środowiska!</p>
+        </div>
+    </section>
+
+    <main class="tasks-container">
+
+
+        <!-- ZADANIE 1 -->
+        <article class="task-card" id="zadanie1">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>1. Zamiana liczby dziesiętnej na dwójkową</h3>
+                    <div class="task-subtitle">Konwersja między systemami pozycyjnymi</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 50, Ćwiczenie 1</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4> Treść zadania z podręcznika:</h4>
+                <p>„Napisz program, który po podaniu liczby całkowitej dodatniej wyświetli jej reprezentację binarną. Sprawdź działanie programu dla różnych liczb.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4> Jak działa algorytm?</h4>
+                <p>Algorytm opiera się na powtarzanym dzieleniu całkowitym wczytanej liczby dziesiętnej przez podstawę systemu docelowego (czyli 2) oraz zapamiętywaniu reszt z dzielenia:</p>
+                <ul class="explanation-points">
+                    <li><strong>Wyznaczanie bitu:</strong> W każdej iteracji pętli obliczamy resztę z dzielenia liczby przez 2 (operacja <code>d % 2</code>). Jeśli reszta wynosi 0, bitem jest znak '0'; jeśli 1 – znak '1'.</li>
+                    <li><strong>Kolejność bitów:</strong> Pierwsza obliczona reszta to najmniej znaczący bit (po prawej stronie zapisu binarnego). Dlatego kolejno uzyskiwane cyfry dołączamy na <em>początek</em> budowanego napisu (<code>b = cyfra + b</code>).</li>
+                    <li><strong>Zmniejszanie liczby:</strong> Po wyznaczeniu cyfry dzielimy liczbę całkowitoliczbowo przez 2 (<code>d = d / 2</code>).</li>
+                    <li><strong>Warunek stopu:</strong> Pętla wykonuje się dopóki liczba jest większa od 0 (<code>while (d > 0)</code>). Dla liczby 26 otrzymujemy kolejno reszty 0, 1, 0, 1, 1, co po dołączaniu od lewej daje poprawny wynik <code>11010</code>.</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(\log_2 n)$ operacji (tyle ile bitów ma liczba)</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(\log_2 n)$ na łańcuch znaków.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie1', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie1', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie1_dec_to_bin')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code1_cpp"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main()
+{
+    int d;
+    string b = "";
+    cout &lt;&lt; "Podaj liczbe dziesietna: ";
+    cin &gt;&gt; d;
+    while (d &gt; 0)
+    {
+        if (d % 2 == 0)
+            b = '0' + b;
+        else
+            b = '1' + b;
+        d = d / 2;
+    }
+    cout &lt;&lt; "Liczba binarna: " &lt;&lt; b &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code1_py"><code>def dec_to_bin(d):
+    if d == 0:
+        return "0"
+    b = ""
+    liczba = d
+    while liczba > 0:
+        if liczba % 2 == 0:
+            b = "0" + b
+        else:
+            b = "1" + b
+        liczba = liczba // 2
+    return b
+
+liczba = 26
+print(f"Liczba {liczba} w systemie dwojkowym to: {dec_to_bin(liczba)}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 2 -->
+        <article class="task-card" id="zadanie2">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>2. Szybkie podnoszenie do potęgi</h3>
+                    <div class="task-subtitle">Potęgowanie binarne (algorytm logarytmiczny)</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 58, Ćwiczenie 7</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Napisz i przetestuj program szybkiego podnoszenia do potęgi. Dobieraj dane tak, aby nie przekroczyć zakresu wyniku.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4> Jak działa algorytm?</h4>
+                <p>Zamiast wykonywać naiwne mnożenie podstawy $x$ przez samą siebie $n$ razy (co wymaga $O(n)$ mnożeń), algorytm korzysta z binarnego zapisu wykładnika:</p>
+                <ul class="explanation-points">
+                    <li><strong>Reprezentacja binarna wykładnika:</strong> Każdą potęgę $x^n$ możemy zapisać jako iloczyn potęg o wykładnikach będących potęgami dwójki, np. $x^{13} = x^{8 + 4 + 1} = x^8 \cdot x^4 \cdot x^1$.</li>
+                    <li><strong>Podwajanie czynnika:</strong> Zmienna pomocnicza <code>tmp</code> przechowuje kolejne kwadraty podstawy ($x, x^2, x^4, x^8, \dots$). Podnosimy ją do kwadratu w każdym kroku (<code>tmp = tmp * tmp</code>).</li>
+                    <li><strong>Sprawdzanie bitu:</strong> Badamy najmłodszy bit wykładnika: jeśli <code>n % 2 == 1</code>, to mnożymy dotychczasowy wynik <code>y</code> przez bieżącą wartość <code>tmp</code>.</li>
+                    <li><strong>Skracanie wykładnika:</strong> Dzielimy wykładnik całkowitoliczbowo przez 2 (<code>n = n / 2</code>). W ten sposób dla $n = 1000$ wykonujemy zaledwie ok. 10 mnożeń zamiast tysiąca!</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(\log_2 n)$ mnożeń</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$ (stała pamięć pomocnicza).</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie2', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie2', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie2_szybkie_potegowanie')">Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code2_cpp"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+int main()
+{
+    int x, n;
+    long long y, tmp;
+    cout &lt;&lt; "Podaj podstawe potegi: ";
+    cin &gt;&gt; x;
+    cout &lt;&lt; "Podaj wykladnik potegi: ";
+    cin &gt;&gt; n;
+    tmp = x;
+    y = 1;
+    while (n &gt; 0)
+    {
+        if (n % 2 == 1)
+            y = y * tmp;
+        n = n / 2;
+        if (n &gt; 0)
+            tmp = tmp * tmp;
+    }
+    cout &lt;&lt; "Wartosc potegi: " &lt;&lt; y &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code2_py"><code>def szybkie_potegowanie(x, n):
+    y = 1
+    tmp = x
+    wykladnik = n
+    while wykladnik > 0:
+        if wykladnik % 2 == 1:
+            y = y * tmp
+        wykladnik = wykladnik // 2
+        if wykladnik > 0:
+            tmp = tmp * tmp
+    return y
+
+podstawa = 3
+wykladnik = 13
+print(f"{podstawa}^{wykladnik} = {szybkie_potegowanie(podstawa, wykladnik)}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 3 -->
+        <article class="task-card" id="zadanie3">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>3. Sprawdzanie, czy wyraz jest palindromem</h3>
+                    <div class="task-subtitle">Analiza łańcuchów znaków i technika dwóch wskaźników</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 63, Ćwiczenie 1</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4> Treść zadania z podręcznika:</h4>
+                <p>„a. Napisz program sprawdzający, czy wyraz złożony z małych liter alfabetu łacińskiego jest palindromem.<br>
+b. Zmodyfikuj specyfikację oraz program sprawdzający, czy wyraz jest palindromem, w taki sposób, aby wypisywał słowo «TAK» niezależnie od tego, czy do zapisu wyrazu użyto małych czy wielkich liter.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4> Jak działa algorytm?</h4>
+                <p>Palindrom to słowo brzmiące identycznie czytane wprost i wspak (np. „kajak”, „radar”, „Anna”):</p>
+                <ul class="explanation-points">
+                    <li><strong>Dwa wskaźniki:</strong> Ustawiamy indeks <code>i = 0</code> na początku wyrazu oraz indeks <code>j = n - 1</code> na ostatnim znaku słowa.</li>
+                    <li><strong>Ignorowanie wielkości liter:</strong> Przed porównaniem znaki zamieniamy na małe litery za pomocą funkcji <code>tolower()</code> w C++ lub <code>lower()</code> w Pythonie, dzięki czemu np. litery 'K' i 'k' są uznawane za zgodne.</li>
+                    <li><strong>Porównanie i zbieżność:</strong> W pętli sprawdzamy, czy znak po lewej równa się znakowi po prawej. Jeśli tak, przesuwamy wskaźniki ku środkowi: <code>i++</code> oraz <code>j--</code>.</li>
+                    <li><strong>Wczesne zakończenie:</strong> Gdy natrafimy na niezgodność, natychmiast zmieniamy flagę na <code>false</code> i przerywamy pętlę. Sprawdzamy co najwyżej $n/2$ par liter.</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(n)$ (dokładnie $\le n/2$ porównań)</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$ dodatkowej pamięci.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie3', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie3', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie3_palindrom')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code3_cpp"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+
+using namespace std;
+
+int main()
+{
+    string wyraz;
+    int i = 0, j;
+    bool palindrom = true;
+    cout &lt;&lt; "Podaj wyraz: ";
+    cin &gt;&gt; wyraz;
+    j = wyraz.size() - 1;
+    while (palindrom && i &lt; j)
+    {
+        if (tolower(wyraz[i]) == tolower(wyraz[j]))
+        {
+            i++;
+            j--;
+        }
+        else
+            palindrom = false;
+    }
+    if (palindrom)
+        cout &lt;&lt; "TAK" &lt;&lt; endl;
+    else
+        cout &lt;&lt; "NIE" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code3_py"><code>def czy_palindrom(wyraz):
+    s = wyraz.lower()
+    i = 0
+    j = len(s) - 1
+    palindrom = True
+    while palindrom and i < j:
+        if s[i] == s[j]:
+            i += 1
+            j -= 1
+        else:
+            palindrom = False
+    return palindrom
+
+slowo = "Kajak"
+odpowiedz = "TAK" if czy_palindrom(slowo) else "NIE"
+print(f"Czy slowo '{slowo}' jest palindromem? {odpowiedz}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 4 -->
+        <article class="task-card" id="zadanie4">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>4. Test pierwszości liczby</h3>
+                    <div class="task-subtitle">Poszukiwanie dzielników w postaci 6i &plusmn; 1</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 78, Ćwiczenie 2</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Napisz i przetestuj program sprawdzający, czy podana liczba jest pierwsza. Wykorzystaj w nim poszukiwanie dzielników wśród liczb o postaci 6i – 1 oraz 6i + 1.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Jak działa algorytm?</h4>
+                <p>Liczba pierwsza ma dokładnie dwa dzielniki naturalne: 1 i samą siebie. Zamiast sprawdzać wszystkie dzielniki do $n$, stosujemy matematyczne optymalizacje:</p>
+                <ul class="explanation-points">
+                    <li><strong>Warunek pierwiastka:</strong> Jeśli liczba $n$ ma dzielnik większy od $\sqrt{n}$, to musi mieć odpowiadający mu dzielnik mniejszy od $\sqrt{n}$. Wystarczy badać dzielniki do warunku $d^2 \le n$.</li>
+                    <li><strong>Eliminacja liczb parzystych i podzielnych przez 3:</strong> Na początku sprawdzamy podzielność przez 2 oraz 3. Dzięki temu eliminujemy $\frac{2}{3}$ wszystkich kolejnych liczb!</li>
+                    <li><strong>Własność liczb pierwszych ($6i \pm 1$):</strong> Każda kolejna liczba pierwsza większa od 3 musi dawać przy dzieleniu przez 6 resztę 1 lub 5 (czyli ma postać $6i - 1$ lub $6i + 1$).</li>
+                    <li><strong>Skok co 6:</strong> Zmienna <code>d</code> zaczyna od 5. W pętli sprawdzamy <code>d</code> oraz <code>d + 2</code> (np. 5 i 7, potem 11 i 13, 17 i 19), zwiększając <code>d</code> o 6 (<code>d = d + 6</code>). Drastycznie skraca to liczbę operacji.</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(\sqrt{n} / 3)$</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie4', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie4', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie4_liczba_pierwsza')">Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code4_cpp"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+int main()
+{
+    int n, d = 5;
+    bool pierwsza;
+    cout &lt;&lt; "n = ";
+    cin &gt;&gt; n;
+    pierwsza = (n &gt; 1);
+    if (n &gt; 2 && n % 2 == 0) pierwsza = false;
+    if (n &gt; 3 && n % 3 == 0) pierwsza = false;
+    while (pierwsza && (d * d &lt;= n))
+    {
+        if (n % d == 0)
+            pierwsza = false;
+        else if (n % (d + 2) == 0)
+            pierwsza = false;
+        else
+            d = d + 6;
+    }
+    if (pierwsza)
+        cout &lt;&lt; "TAK" &lt;&lt; endl;
+    else
+        cout &lt;&lt; "NIE" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code4_py"><code>def czy_pierwsza(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    d = 5
+    while d * d <= n:
+        if n % d == 0 or n % (d + 2) == 0:
+            return False
+        d += 6
+    return True
+
+liczba = 37
+wynik = "PIERWSZA" if czy_pierwsza(liczba) else "ZLOZONA"
+print(f"Liczba {liczba} jest: {wynik}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 5 -->
+        <article class="task-card" id="zadanie5">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>5. Rozkład liczby na czynniki pierwsze</h3>
+                    <div class="task-subtitle">Faktoryzacja z optymalizacją podwójnego kroku</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 81, Ćwiczenie 4</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Program wypisujący czynniki pierwsze podanej liczby naturalnej zmodyfikuj tak, aby ewentualny czynnik pierwszy 2 rozpatrzyć w oddzielnej pętli, a w pętli głównej powiększać wartość zmiennej d o 2.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Jak działa algorytm?</h4>
+                <p>Zgodnie z zasadniczym twierdzeniem arytmetyki, każdą liczbę naturalną większą od 1 można jednoznacznie przedstawić w postaci iloczynu liczb pierwszych:</p>
+                <ul class="explanation-points">
+                    <li><strong>Wydzielenie dwójki:</strong> Jedyną parzystą liczbą pierwszą jest 2. W osobnej początkowej pętli <code>while (n % 2 == 0)</code> dzielimy liczbę przez 2 i wypisujemy ten czynnik tak długo, jak jest to możliwe.</li>
+                    <li><strong>Badanie liczb nieparzystych:</strong> Po usunięciu wszystkich dwójek w liczbie nie ma już żadnych czynników parzystych! Zmienna <code>d</code> zaczyna od 3 i zwiększa się o 2 (<code>d += 2</code>), sprawdzając 3, 5, 7, 9, itd.</li>
+                    <li><strong>Warunek zakończenia pętli:</strong> Podobnie jak w teście pierwszości, wystarczy sprawdzać dzielniki do $d^2 \le n$.</li>
+                    <li><strong>Ostatni czynnik:</strong> Jeśli po wyjściu z pętli pozostała wartość $n > 1$, oznacza to, że pozostała część liczby jest już liczbą pierwszą i wypisujemy ją jako ostatni czynnik.</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(\sqrt{n})$ operacji w najgorszym razie</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie5', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie5', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie5_czynniki_pierwsze')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code5_cpp"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+int main()
+{
+    int n, d = 2;
+    cout &lt;&lt; "n = ";
+    cin &gt;&gt; n;
+    cout &lt;&lt; n &lt;&lt; " = ";
+
+    // Wydzielenie czynnika 2 w osobnej petli
+    while (n % 2 == 0)
+    {
+        cout &lt;&lt; 2 &lt;&lt; " * ";
+        n = n / 2;
+    }
+
+    // Czynniki nieparzyste z krokiem d += 2
+    d = 3;
+    while (d * d &lt;= n)
+    {
+        if (n % d == 0)
+        {
+            cout &lt;&lt; d &lt;&lt; " * ";
+            n = n / d;
+        }
+        else
+            d += 2;
+    }
+    if (n &gt; 1)
+        cout &lt;&lt; n;
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code5_py"><code>def rozklad_na_czynniki_pierwsze(n):
+    czynniki = []
+    liczba = n
+    while liczba % 2 == 0:
+        czynniki.append(2)
+        liczba = liczba // 2
+    d = 3
+    while d * d <= liczba:
+        if liczba % d == 0:
+            czynniki.append(d)
+            liczba = liczba // d
+        else:
+            d += 2
+    if liczba > 1:
+        czynniki.append(liczba)
+    return czynniki
+
+liczba = 456
+czynniki = rozklad_na_czynniki_pierwsze(liczba)
+print(f"{liczba} = {' * '.join(map(str, czynniki))}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 6 -->
+        <article class="task-card" id="zadanie6">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>6. Algorytm Euklidesa (NWD z dzieleniem)</h3>
+                    <div class="task-subtitle">Wyznaczanie największego wspólnego dzielnika</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 108, Ćwiczenie 1</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Napisz program wyznaczający największy wspólny dzielnik dwóch wczytanych liczb zgodnie z podanymi wcześniej specyfikacją i algorytmem [z wykorzystaniem reszty z dzielenia modulo].”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4> Jak działa algorytm?</h4>
+                <p>Wersja algorytmu Euklidesa z operacją dzielenia modulo zastępuje powolne wielokrotne odejmowanie błyskawicznym dzieleniem z resztą:</p>
+                <ul class="explanation-points">
+                    <li><strong>Twierdzenie Euklidesa:</strong> Dla dowolnych dwóch liczb całkowitych dodatnich $a$ i $b$ zachodzi równość: $\text{NWD}(a, b) = \text{NWD}(b, a \bmod b)$.</li>
+                    <li><strong>Pętla redukcji:</strong> Dopóki druga liczba $b \neq 0$, wyznaczamy resztę $a \bmod b$. Nową wartością zmiennej $a$ staje się dotychczasowe $b$, a nową wartością $b$ – obliczona reszta.</li>
+                    <li><strong>Warunek zakończenia:</strong> Gdy reszta osiąga 0 (czyli $b = 0$), pętla kończy bieg, a szukanym Największym Wspólnym Dzielnikiem jest aktualna wartość zmiennej $a$.</li>
+                    <li><strong>Prędkość:</strong> Algorytm działa błyskawicznie nawet dla liczb mających setki cyfr. Np. dla liczb 1989 i 867 wynik 51 otrzymujemy w zaledwie 4 krokach!</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(\log(\min(a, b)))$ (zgodna z twierdzeniem Lamé)</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie6', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie6', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie6_euklides_nwd')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code6_cpp"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+int NWD(int a, int b)
+{
+    int pom;
+    while (b != 0)
+    {
+        pom = b;
+        b = a % b;
+        a = pom;
+    }
+    return a;
+}
+
+int main()
+{
+    int a, b;
+    cout &lt;&lt; "a = "; cin &gt;&gt; a;
+    cout &lt;&lt; "b = "; cin &gt;&gt; b;
+    cout &lt;&lt; "NWD(" &lt;&lt; a &lt;&lt; ", " &lt;&lt; b &lt;&lt; ") = " &lt;&lt; NWD(a, b) &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code6_py"><code>def nwd_dzielenie(a, b):
+    while b != 0:
+        pom = b
+        b = a % b
+        a = pom
+    return a
+
+a = 1989
+b = 867
+print(f"NWD({a}, {b}) = {nwd_dzielenie(a, b)}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 7 -->
+        <article class="task-card" id="zadanie7">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>7. Szyfrowanie szyfrem Cezara</h3>
+                    <div class="task-subtitle">Kryptografia klasyczna i arytmetyka modularna</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 120, Ćwiczenie 2</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Program szyfrujący napis złożony z wielkich liter alfabetu zmodyfikuj tak, aby przy wyznaczaniu litery szyfrogramu zastosować operację mod.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Jak działa algorytm?</h4>
+                <p>Szyfr Cezara polega na cyklicznym przesunięciu każdej litery alfabetu o stałą wartość $k$ (klucz):</p>
+                <ul class="explanation-points">
+                    <li><strong>Arytmetyka modularna:</strong> Alfabet łaciński ma 26 znaków (indeksy 0..25). Aby zapobiec wychodzeniu poza alfabet dla liter z końca (np. 'Z' + 3 = 'C'), stosujemy resztę z dzielenia przez 26.</li>
+                    <li><strong>Wzór matematyczny:</strong> Kod wynikowy litery wyznaczamy wzorem: <br><code>nowy_znak = 'A' + (znak - 'A' + klucz) % 26</code>.</li>
+                    <li><strong>Zachowanie znaków innych niż litery:</strong> Spacje, cyfry i znaki interpunkcyjne są przepisywane bez zmian.</li>
+                    <li><strong>Odszyfrowanie:</strong> Deszyfrowanie polega na przesunięciu w przeciwnym kierunku, czyli o klucz $26 - (k \bmod 26)$.</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(n)$ dla tekstu o długości $n$</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(n)$ na przechowanie szyfrogramu.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie7', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie7', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie7_szyfr_cezara')">Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code7_cpp"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+int main()
+{
+    string t_jawny, szyfrogram = "";
+    int klucz;
+    cout &lt;&lt; "Tekst jawny: ";
+    cin &gt;&gt; t_jawny;
+    cout &lt;&lt; "Klucz: ";
+    cin &gt;&gt; klucz;
+    
+    for (int i = 0; i &lt; t_jawny.size(); i++)
+    {
+        if (t_jawny[i] &gt;= 'A' && t_jawny[i] &lt;= 'Z')
+        {
+            char c = 'A' + (t_jawny[i] - 'A' + klucz) % 26;
+            szyfrogram += c;
+        }
+        else if (t_jawny[i] &gt;= 'a' && t_jawny[i] &lt;= 'z')
+        {
+            char c = 'a' + (t_jawny[i] - 'a' + klucz) % 26;
+            szyfrogram += c;
+        }
+        else
+        {
+            szyfrogram += t_jawny[i];
+        }
+    }
+    cout &lt;&lt; "Szyfrogram: " &lt;&lt; szyfrogram &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code7_py"><code>def szyfruj_cezar(tekst, klucz):
+    szyfrogram = ""
+    klucz = klucz % 26
+    for c in tekst:
+        if 'A' <= c <= 'Z':
+            kod = (ord(c) - ord('A') + klucz) % 26 + ord('A')
+            szyfrogram += chr(kod)
+        elif 'a' <= c <= 'z':
+            kod = (ord(c) - ord('a') + klucz) % 26 + ord('a')
+            szyfrogram += chr(kod)
+        else:
+            szyfrogram += c
+    return szyfrogram
+
+jawny = "INFORMATYKA"
+k = 3
+print(f"Tekst jawny: '{jawny}' -> Zaszyfrowany: '{szyfruj_cezar(jawny, k)}'")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 8 -->
+        <article class="task-card" id="zadanie8">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>8. Wyszukiwanie binarne</h3>
+                    <div class="task-subtitle">Poszukiwanie elementu w uporządkowanej tablicy (dziel i zwyciężaj)</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 157, Ćwiczenie 3</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Napisz program, który sprawdzi, czy w uporządkowanej tablicy n liczb całkowitych występuje podany element. Liczbę powinna wyszukiwać funkcja realizująca algorytm przeszukiwania binarnego.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Jak działa algorytm?</h4>
+                <p>Wyszukiwanie binarne wymaga uprzednio posortowanego zbioru danych i realizuje technikę <em>dziel i zwyciężaj</em>:</p>
+                <ul class="explanation-points">
+                    <li><strong>Środek przedziału:</strong> Zamiast sprawdzać każdy element po kolei (co zajęłoby $O(n)$ w wyszukiwaniu liniowym), wyznaczamy element środkowy badanego przedziału <code>srodek = (lewy + prawy) / 2</code>.</li>
+                    <li><strong>Porównanie z celem:</strong> Jeśli szukana liczba $x$ jest równa elementowi środkowemu, kończymy z sukcesem.</li>
+                    <li><strong>Odrzucenie połowy zbioru:</strong> Jeśli szukana liczba jest mniejsza od środkowej, odrzucamy całą prawą połowę (<code>prawy = srodek - 1</code>); jeśli jest większa, odrzucamy całą lewą połowę (<code>lewy = srodek + 1</code>).</li>
+                    <li><strong>Potęga skali:</strong> W zbiorze 1 000 000 posortowanych elementów wyszukiwanie binarne znajdzie liczbę lub stwierdzi jej brak w maksymalnie 20 krokach!</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(\log_2 n)$ operacji</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$ w wersji iteracyjnej.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie8', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie8', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie8_wyszukiwanie_binarne')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code8_cpp"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+bool SzukajBin(int A[], int n, int x)
+{
+    int lewy = 0, prawy = n - 1, srodek;
+    while (lewy &lt;= prawy)
+    {
+        srodek = (lewy + prawy) / 2;
+        if (A[srodek] == x)
+            return true;
+        else if (A[srodek] &lt; x)
+            lewy = srodek + 1;
+        else
+            prawy = srodek - 1;
+    }
+    return false;
+}
+
+int main()
+{
+    const int N = 9;
+    int A[N] = {1, 4, 5, 6, 9, 12, 17, 24, 30};
+    int x;
+    cout &lt;&lt; "Podaj liczbe do wyszukania: ";
+    cin &gt;&gt; x;
+    if (SzukajBin(A, N, x))
+        cout &lt;&lt; "Liczba jest w tablicy" &lt;&lt; endl;
+    else
+        cout &lt;&lt; "Liczby nie ma w tablicy" &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code8_py"><code>def szukaj_bin(tablica, x):
+    lewy = 0
+    prawy = len(tablica) - 1
+    while lewy <= prawy:
+        srodek = (lewy + prawy) // 2
+        if tablica[srodek] == x:
+            return srodek
+        elif tablica[srodek] < x:
+            lewy = srodek + 1
+        else:
+            prawy = srodek - 1
+    return -1
+
+tab = [1, 4, 5, 6, 9, 12, 17, 24, 30]
+szukana = 17
+pozycja = szukaj_bin(tab, szukana)
+print(f"Liczba {szukana} znaleziona na indeksie: {pozycja}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 9 -->
+        <article class="task-card" id="zadanie9">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>9. Jednoczesne wyszukiwanie minimum i maksimum</h3>
+                    <div class="task-subtitle">Optymalny algorytm MiniMaks (porównania parami)</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 161, Ćwiczenie 4</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Napisz program wyszukujący jednocześnie największy i najmniejszy element tablicy. Wykorzystaj przedstawioną powyżej funkcję MiniMaks.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Jak działa algorytm?</h4>
+                <p>Naiwny algorytm wyszukiwania min i max wymaga $2n - 2$ porównań (przejście tablicy w poszukiwaniu minimum i drugie przejście w poszukiwaniu maksimum). Prezentowany algorytm oszczędza 25% operacji:</p>
+                <ul class="explanation-points">
+                    <li><strong>Grupowanie w pary:</strong> Pobieramy z tablicy po dwa sąsiednie elementy na raz: <code>A[i]</code> oraz <code>A[i+1]</code>.</li>
+                    <li><strong>Pierwsze porównanie (wewnętrzne w parze):</strong> Porównujemy te dwa elementy ze sobą (1 operacja). Dzięki temu wiemy, który z nich jest lokalnym kandydatem na minimum, a który na maksimum.</li>
+                    <li><strong>Dwa porównania zewnętrzne:</strong> Element mniejszy z pary porównujemy wyłącznie z globalnym <code>mini</code>, a element większy z pary wyłącznie z globalnym <code>maks</code>.</li>
+                    <li><strong>Bilans zysku:</strong> Na każde dwa elementy tablicy zużywamy dokładnie 3 porównania zamiast 4. Łączna liczba porównań spada do $\approx \frac{3n}{2}$, co jest teoretycznym minimum dla tego problemu.</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność:</strong> $\frac{3n}{2}$ porównań</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie9', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie9', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie9_min_maks')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code9_cpp"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+void MiniMaks(int A[], int n, int &mini, int &maks)
+{
+    if (A[0] &gt; A[1])
+    {
+        mini = A[1]; maks = A[0];
+    }
+    else
+    {
+        mini = A[0]; maks = A[1];
+    }
+    for (int i = 2; i &lt; n - 1; i += 2)
+    {
+        if (A[i] &gt; A[i + 1])
+        {
+            if (A[i + 1] &lt; mini) mini = A[i + 1];
+            if (A[i] &gt; maks) maks = A[i];
+        }
+        else
+        {
+            if (A[i] &lt; mini) mini = A[i];
+            if (A[i + 1] &gt; maks) maks = A[i + 1];
+        }
+    }
+}
+
+int main()
+{
+    const int N = 8;
+    int A[N] = {14, 3, 9, 27, 1, 42, 8, 19};
+    int mini, maks;
+    MiniMaks(A, N, mini, maks);
+    cout &lt;&lt; "MIN = " &lt;&lt; mini &lt;&lt; ", MAX = " &lt;&lt; maks &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code9_py"><code>def mini_maks(A):
+    n = len(A)
+    if n == 0: return None, None
+    if n % 2 == 1:
+        mini = maks = A[0]
+        i = 1
+    else:
+        if A[0] > A[1]: mini, maks = A[1], A[0]
+        else: mini, maks = A[0], A[1]
+        i = 2
+    while i < n - 1:
+        if A[i] > A[i+1]:
+            if A[i+1] < mini: mini = A[i+1]
+            if A[i] > maks: maks = A[i]
+        else:
+            if A[i] < mini: mini = A[i]
+            if A[i+1] > maks: maks = A[i+1]
+        i += 2
+    return mini, maks
+
+dane = [14, 3, 9, 27, 1, 42, 8, 19]
+najm, najw = mini_maks(dane)
+print(f"Tablica: {dane} -> MIN: {najm}, MAX: {najw}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ZADANIE 10 -->
+        <article class="task-card" id="zadanie10">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>10. Sortowanie bąbelkowe (Bubble Sort)</h3>
+                    <div class="task-subtitle">Klasyczne sortowanie przez prostą zamianę</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Strona 173, Ćwiczenie 1</span>
+                </div>
+            </div>
+
+
+            <div class="task-statement">
+                <h4>Treść zadania z podręcznika:</h4>
+                <p>„Napisz i przetestuj program sortujący niemalejąco tablicę liczb całkowitych algorytmem sortowania bąbelkowego.”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Jak działa algorytm?</h4>
+                <p>Sortowanie bąbelkowe to jeden z najbardziej poglądowych algorytmów porządkowania danych w miejscu:</p>
+                <ul class="explanation-points">
+                    <li><strong>Idea bąbelka:</strong> Przeglądamy tablicę od lewej do prawej i porównujemy pary sąsiednich elementów <code>A[j]</code> i <code>A[j+1]</code>. Jeśli element lewy jest większy od prawego, zamieniamy je miejscami.</li>
+                    <li><strong>Wypływanie na koniec:</strong> W wyniku pierwszego pełnego przebiegu największa liczba w tablicy „wypływa” na sam koniec (pod indeks $n-1$).</li>
+                    <li><strong>Skracanie zakresu:</strong> W kolejnym kroku badamy tablicę już tylko do przedostatniej pozycji, gdyż ostatni element ma już zagwarantowaną docelową pozycję.</li>
+                    <li><strong>Optymalizacja z flagą zamiany:</strong> Jeśli w danym przejściu pętli wewnętrznej nie dokonano żadnej zamiany elementów, tablica jest już w pełni posortowana i można natychmiast przerwać program.</li>
+                </ul>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> $O(n^2)$ pesymistyczna i średnia, $O(n)$ w przypadku posortowanym</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> $O(1)$ (sortowanie w miejscu).</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie10', 'cpp')">C++ (z podręcznika)</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie10', 'py')">Python (interaktywny)</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('zadanie10_sortowanie_babelkowe')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre id="code10_cpp"><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+void SortujBabelkowo(int A[], int n)
+{
+    int pom;
+    for (int i = 1; i &lt; n; i++)
+    {
+        for (int j = 0; j &lt; n - i; j++)
+        {
+            if (A[j] &gt; A[j + 1])
+            {
+                pom = A[j];
+                A[j] = A[j + 1];
+                A[j + 1] = pom;
+            }
+        }
+    }
+}
+
+int main()
+{
+    const int N = 5;
+    int A[N] = {6, 4, 9, 1, 5};
+    SortujBabelkowo(A, N);
+    cout &lt;&lt; "Posortowana tablica: ";
+    for (int i = 0; i &lt; N; i++)
+        cout &lt;&lt; A[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="py">
+                        <pre id="code10_py"><code>def sortowanie_babelkowe(A):
+    tab = list(A)
+    n = len(tab)
+    for i in range(1, n):
+        zamiana = False
+        for j in range(0, n - i):
+            if tab[j] > tab[j + 1]:
+                tab[j], tab[j + 1] = tab[j + 1], tab[j]
+                zamiana = True
+        if not zamiana:
+            break
+    return tab
+
+liczby = [6, 4, 9, 1, 5]
+print("Przed:", liczby)
+print("Po:   ", sortowanie_babelkowe(liczby))</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Powrót na górę -->
+        <div class="back-to-top">
+            <a href="#">Wróć na początek strony</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Polina Bohomol uczeń ZSK klasa 3b</p>
+    </footer>
+
+    <!-- Modalny edytor z silnikiem Skulpt -->
+    <div id="editorModal">
+        <div class="editor-container">
+            <div class="editor-toolbar">
+                <button class="run-btn" onclick="runPython()">Run ❯</button>
+                <button class="close-btn" onclick="closeEditor()">Zamknij</button>
+            </div>
+
+            <div class="editor-workarea">
+                <div class="code-panel">
+                    <textarea id="pythonCode"># Wczytywanie kodu...</textarea>
+                </div>
+                <div class="output-panel">
+                    <pre id="pythonOutput">Kliknij "Run", aby zobaczyć wynik...</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

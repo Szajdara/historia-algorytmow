@@ -39,3 +39,18 @@ for p in widmo:
     # Rysujemy prosty wykres z gwiazdek
     wykres = "*" * int(p["amplituda"] * 2)
     print(f"{p['k']} | {p['real']:8.2f} | {p['imag']:8.2f} | {p['amplituda']:16.2f} | {wykres}")
+
+    #Ten kod to Dyskretna Transformata Fouriera (DFT),
+    #  która działa jak pryzmat rozszczepiający światło
+    #  na kolory tęczy: bierze surowy sygnał zmieniający
+    #  się w czasie (tutaj 4 próbki: [1, 2, 1, -1]) i
+    #  sprawdza po kolei dla każdej możliwej częstotliwości
+    #  ($k$), jak mocno jest ona obecna w całym sygnale —
+    #  robi to, mnożąc każdą próbkę przez fale testowe o 
+    # różnym tempie drgań (za pomocą funkcji $\cos$ i $\sin$ 
+    # ze wzoru Eulera), a następnie sumując te dopasowania 
+    # w części rzeczywiste (real) i urojone (imag), z których
+    #  na koniec twierdzeniem Pitagorasa wylicza amplitudę 
+    # (czyli głośność/siłę danego tonu); dzięki temu z pozoru
+    #  chaotycznego ciągu liczb dowiadujesz się, z jakich 
+    # prostych czystych fal składa się Twój dźwięk lub wykres.

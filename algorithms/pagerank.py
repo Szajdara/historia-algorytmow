@@ -28,3 +28,17 @@ graf = [
 ]
 
 pagerank(graf)
+
+#Algorytm PageRank (słynny fundament wyszukiwarki Google)
+#  działa jak konkurs popularności w internecie:
+#  każda strona zaczyna z równą porcją „prestiżu” ($1/N$),
+#  a w każdej rundzie oddaje cały swój prestiż stronom,
+#  do których linkuje — dzieląc go po równo między wszystkie
+#  swoje linki wychodzące (pr[j] / wychodzace[j]),
+#  więc link od potężnej strony waży o wiele więcej 
+# niż od mało znaczącej, a współczynnik tłumienia $d = 0.85$
+#  uwzględnia to, że internauta w 85% przypadków klika linki,
+#  a w 15% losowo wpisuje zupełnie nowy adres ((1 - d) / N);
+#  w ten sposób po kilku iteracjach prestiż krążący w sieci
+#  stabilizuje się i wskazuje najważniejszą stronę
+#  (tutaj C, bo zbiera najwięcej mocnych odnośników).

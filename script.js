@@ -145,3 +145,30 @@ function runPython() {
         mypre.innerHTML = "<span style='color:red; font-weight:bold;'>" + err.toString() + "</span>";
     });
 }
+
+// Obsługa zakładek kodu (C++ / Python)
+function switchTab(taskId, lang) {
+    const card = document.getElementById(taskId);
+    if (!card) return;
+
+    // Przełącz aktywne przyciski
+    const tabs = card.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => {
+        if (tab.getAttribute('data-lang') === lang) {
+            tab.classList.add('active');
+        } else {
+            tab.classList.remove('active');
+        }
+    });
+
+    // Przełącz aktywny blok kodu
+    const panes = card.querySelectorAll('.code-pane');
+    panes.forEach(pane => {
+        if (pane.getAttribute('data-lang') === lang) {
+            pane.classList.add('active');
+        } else {
+            pane.classList.remove('active');
+        }
+    });
+}
+
