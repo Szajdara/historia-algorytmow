@@ -18,21 +18,21 @@
 
     <header>
         <h1>10 Zadań z podręcznika</h1>
-        <h2>Informatyka na czasie 2 – Zakres rozszerzony (Nowa Era)</h2>
+        <h2>Informatyka na czasie 2</h2>
         <nav class="main-nav">
             <a href="index.html" class="nav-link"> Oś czasu historii</a>
-            <a href="zadania.html" class="nav-link active"> Zadania z podręcznika (10 algorytmów)</a>
+            <a href="zadania.html" class="nav-link active"> Zadania z podręcznika</a>
         </nav>
     </header>
 
     <section class="intro-section">
         <div class="intro-box">
             <h3>O WYBRANYCH ALGORYTMACH</h3>
-            <p>Poniżej znajduje się zestawienie <strong>10 przystępnych i fundamentalnych zadań algorytmicznych</strong> pochodzących bezpośrednio z oficjalnego podręcznika dla liceum i technikum <em>„Informatyka na czasie 2. Zakres rozszerzony”</em> (autorzy: Janusz Mazur, Paweł Perekietka, Zbigniew Talaga, Janusz S. Wierzbicki). Każde zadanie zawiera dokładne namiary w podręczniku, pełną treść, kod w C++ (z podręcznika) oraz w Pythonie, a także szczegółowe omówienie zasady działania.</p>
+            <p>Poniżej znajduje się zestawienie <strong>10 przystępnych i fundamentalnych zadań algorytmicznych</strong> pochodzących bezpośrednio z oficjalnego podręcznika dla liceum i technikum „Informatyka na czasie 2. Zakres rozszerzony” (autorzy: Janusz Mazur, Paweł Perekietka, Zbigniew Talaga, Janusz S. Wierzbicki). Każde zadanie zawiera dokładne namiary w podręczniku, pełną treść, kod w C++ (z podręcznika) oraz w Pythonie, a także szczegółowe omówienie zasady działania.</p>
         </div>
         <div class="intro-box">
             <h3>INTERAKTYWNOŚĆ</h3>
-            <p>Każdy z 10 algorytmów możesz nie tylko przeanalizować, ale także uruchomić wprost w przeglądarce za pomocą przycisku <strong>„Wypróbuj w edytorze”</strong> zintegrowanego z silnikiem <em>Skulpt</em>. Możesz modyfikować parametry wejściowe i sprawdzać rezultaty w czasie rzeczywistym bez instalowania żadnego środowiska!</p>
+            <p>Każdy z 10 algorytmów możesz nie tylko przeanalizować, ale także uruchomić wprost w przeglądarce za pomocą przycisku <strong>„Wypróbuj w edytorze”</strong> zintegrowanego z silnikiem Skulpt. Możesz modyfikować parametry wejściowe i sprawdzać rezultaty w czasie rzeczywistym bez instalowania żadnego środowiska!</p>
         </div>
     </section>
 
@@ -62,7 +62,7 @@
                 <p>Algorytm opiera się na powtarzanym dzieleniu całkowitym wczytanej liczby dziesiętnej przez podstawę systemu docelowego (czyli 2) oraz zapamiętywaniu reszt z dzielenia:</p>
                 <ul class="explanation-points">
                     <li><strong>Wyznaczanie bitu:</strong> W każdej iteracji pętli obliczamy resztę z dzielenia liczby przez 2 (operacja <code>d % 2</code>). Jeśli reszta wynosi 0, bitem jest znak '0'; jeśli 1 – znak '1'.</li>
-                    <li><strong>Kolejność bitów:</strong> Pierwsza obliczona reszta to najmniej znaczący bit (po prawej stronie zapisu binarnego). Dlatego kolejno uzyskiwane cyfry dołączamy na <em>początek</em> budowanego napisu (<code>b = cyfra + b</code>).</li>
+                    <li><strong>Kolejność bitów:</strong> Pierwsza obliczona reszta to najmniej znaczący bit (po prawej stronie zapisu binarnego). Dlatego kolejno uzyskiwane cyfry dołączamy na początek budowanego napisu (<code>b = cyfra + b</code>).</li>
                     <li><strong>Zmniejszanie liczby:</strong> Po wyznaczeniu cyfry dzielimy liczbę całkowitoliczbowo przez 2 (<code>d = d / 2</code>).</li>
                     <li><strong>Warunek stopu:</strong> Pętla wykonuje się dopóki liczba jest większa od 0 (<code>while (d > 0)</code>). Dla liczby 26 otrzymujemy kolejno reszty 0, 1, 0, 1, 1, co po dołączaniu od lewej daje poprawny wynik <code>11010</code>.</li>
                 </ul>
@@ -75,8 +75,8 @@
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie1', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie1', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie1', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie1', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie1_dec_to_bin')"> Wypróbuj w edytorze</button>
@@ -164,8 +164,8 @@ print(f"Liczba {liczba} w systemie dwojkowym to: {dec_to_bin(liczba)}")</code></
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie2', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie2', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie2', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie2', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie2_szybkie_potegowanie')">Wypróbuj w edytorze</button>
@@ -212,9 +212,10 @@ int main()
             tmp = tmp * tmp
     return y
 
-podstawa = 3
-wykladnik = 13
-print(f"{podstawa}^{wykladnik} = {szybkie_potegowanie(podstawa, wykladnik)}")</code></pre>
+przyklady = [(3, 13), (2, 10), (5, 4), (7, 5)]
+for podstawa, wykladnik in przyklady:
+    wynik = szybkie_potegowanie(podstawa, wykladnik)
+    print(f"{podstawa}^{wykladnik} = {wynik}")</code></pre>
                     </div>
                 </div>
             </div>
@@ -257,8 +258,8 @@ b. Zmodyfikuj specyfikację oraz program sprawdzający, czy wyraz jest palindrom
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie3', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie3', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie3', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie3', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie3_palindrom')"> Wypróbuj w edytorze</button>
@@ -355,8 +356,8 @@ print(f"Czy slowo '{slowo}' jest palindromem? {odpowiedz}")</code></pre>
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie4', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie4', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie4', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie4', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie4_liczba_pierwsza')">Wypróbuj w edytorze</button>
@@ -452,8 +453,8 @@ print(f"Liczba {liczba} jest: {wynik}")</code></pre>
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie5', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie5', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie5', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie5', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie5_czynniki_pierwsze')"> Wypróbuj w edytorze</button>
@@ -559,8 +560,8 @@ print(f"{liczba} = {' * '.join(map(str, czynniki))}")</code></pre>
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie6', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie6', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie6', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie6', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie6_euklides_nwd')"> Wypróbuj w edytorze</button>
@@ -645,8 +646,8 @@ print(f"NWD({a}, {b}) = {nwd_dzielenie(a, b)}")</code></pre>
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie7', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie7', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie7', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie7', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie7_szyfr_cezara')">Wypróbuj w edytorze</button>
@@ -732,7 +733,7 @@ print(f"Tekst jawny: '{jawny}' -> Zaszyfrowany: '{szyfruj_cezar(jawny, k)}'")</c
 
             <div class="task-explanation">
                 <h4>Jak działa algorytm?</h4>
-                <p>Wyszukiwanie binarne wymaga uprzednio posortowanego zbioru danych i realizuje technikę <em>dziel i zwyciężaj</em>:</p>
+                <p>Wyszukiwanie binarne wymaga uprzednio posortowanego zbioru danych i realizuje technikę dziel i zwyciężaj:</p>
                 <ul class="explanation-points">
                     <li><strong>Środek przedziału:</strong> Zamiast sprawdzać każdy element po kolei (co zajęłoby $O(n)$ w wyszukiwaniu liniowym), wyznaczamy element środkowy badanego przedziału <code>srodek = (lewy + prawy) / 2</code>.</li>
                     <li><strong>Porównanie z celem:</strong> Jeśli szukana liczba $x$ jest równa elementowi środkowemu, kończymy z sukcesem.</li>
@@ -748,8 +749,8 @@ print(f"Tekst jawny: '{jawny}' -> Zaszyfrowany: '{szyfruj_cezar(jawny, k)}'")</c
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie8', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie8', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie8', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie8', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie8_wyszukiwanie_binarne')"> Wypróbuj w edytorze</button>
@@ -850,8 +851,8 @@ print(f"Liczba {szukana} znaleziona na indeksie: {pozycja}")</code></pre>
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie9', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie9', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie9', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie9', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie9_min_maks')"> Wypróbuj w edytorze</button>
@@ -963,8 +964,8 @@ print(f"Tablica: {dane} -> MIN: {najm}, MAX: {najw}")</code></pre>
             <div class="code-section">
                 <div class="code-tabs-header">
                     <div class="tab-buttons">
-                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie10', 'cpp')">C++ (z podręcznika)</button>
-                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie10', 'py')">Python (interaktywny)</button>
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('zadanie10', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('zadanie10', 'py')">Python</button>
                     </div>
                     <div class="code-actions">
                         <button class="action-btn" onclick="openEditor('zadanie10_sortowanie_babelkowe')"> Wypróbuj w edytorze</button>

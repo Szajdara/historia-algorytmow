@@ -16,7 +16,7 @@ def szybkie_potegowanie(x, n):
 
 # Test algorytmu
 print("--- Algorytm szybkiego podnoszenia do potęgi ---")
-przykłady = [(3, 13), (2, 10), (5, 4), (7, 5)]
-for podstawa, wykladnik in przykłady:
+przyklady = [(3, 13), (2, 10), (5, 4), (7, 5)]
+for podstawa, wykladnik in przyklady:
     wynik = szybkie_potegowanie(podstawa, wykladnik)
     print(f"{podstawa}^{wykladnik} = {wynik}")
