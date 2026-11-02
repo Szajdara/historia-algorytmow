@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorytm a cykl: podstawowe różnice – Informatyka i Matematyka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteka Skulpt do uruchamiania kodu Python w przeglądarce -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+
+<body>
+
+    <canvas id="confetti"></canvas>
+
+    <header>
+        <h1>Algorytm a cykl: podstawowe różnice</h1>
+        <h2>Definicja, cechy główne, rozróżnienie w informatyce i matematyce</h2>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link"> Oś czasu historii</a>
+            <a href="zadania.html" class="nav-link"> Zadania z podręcznika</a>
+            <a href="wydawanie-reszty.html" class="nav-link"> Wydawanie reszty</a>
+            <a href="algorytm-a-cykl.html" class="nav-link active"> Algorytm a cykl</a>
+        </nav>
+    </header>
+
+    <section class="intro-section">
+        <div class="intro-box">
+            <h3>CZYM JEST ALGORYTM?</h3>
+            <p><strong>Algorytm</strong> to skończony, uporządkowany ciąg jasno zdefiniowanych czynności (instrukcji), koniecznych do wykonania w celu rozwiązania określonego zadania i przeprowadzenia systemu ze stanu początkowego (danych wejściowych) do stanu końcowego (wyniku) w <strong>skończonej liczbie kroków</strong>.</p>
+        </div>
+        <div class="intro-box">
+            <h3>CZYM JEST CYKL?</h3>
+            <p><strong>Cykl</strong> (z greckiego <em>kyklos</em> – koło, krąg) to zamknięta, powtarzająca się sekwencja zdarzeń, operacji, stanów lub elementów, która po wykonaniu pełnego obiegu <strong>powraca do punktu wyjścia</strong>. W informatyce może być konstrukcją wewnątrz algorytmu (pętlą) lub cechą struktury danych, a w matematyce – drogą zamkniętą w grafie lub permutacją kołową.</p>
+        </div>
+    </section>
+
+    <main class="tasks-container">
+
+        <!-- KARTA 1: DEFINICJE I CECHY GŁÓWNE -->
+        <article class="task-card" id="definicje-i-cechy">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>1. Definicja i cechy główne: Algorytm vs Cykl</h3>
+                    <div class="task-subtitle">Fundamentalne własności decydujące o tym, kiedy ciąg operacji jest algorytmem, a kiedy cyklem</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Podstawy teoretyczne</span>
+                </div>
+            </div>
+
+            <div class="task-statement">
+                <h4>Kluczowa zasada:</h4>
+                <p>„Każdy poprawny algorytm może zawierać w sobie cykle (pętle), ale sam w sobie nie może być nieskończonym cyklem – musi zawsze posiadać jednoznaczny warunek zakończenia (STOP).”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Schemat przepływu – wizualne porównanie:</h4>
+                <p>Algorytm jest procesem <strong>ukierunkowanym na cel</strong> (od wejścia do wyjścia), natomiast cykl jest <strong>strukturą zamkniętą (kołową)</strong> wracającą do stanu początkowego:</p>
+
+                <p style="margin-top: 10px; font-weight: 600; color: #e0f2fe;">Przepływ algorytmu (zawsze osiąga STOP):</p>
+                <div class="flow-diagram-box">
+                    <span class="flow-node start-stop">START (Dane wejściowe)</span>
+                    <span class="flow-arrow">-></span>
+                    <span class="flow-node">Krok 1 (Sekwencja)</span>
+                    <span class="flow-arrow">-></span>
+                    <span class="flow-node">Krok 2 (Warunek / Pętla skończona)</span>
+                    <span class="flow-arrow">-></span>
+                    <span class="flow-node start-stop">STOP (Wynik)</span>
+                </div>
+
+                <p style="margin-top: 14px; font-weight: 600; color: #a7f3d0;">Struktura cyklu (obieg zamknięty – powrót do punktu wyjścia):</p>
+                <div class="flow-diagram-box">
+                    <span class="flow-node cycle-node">Stan / Wierzchołek A</span>
+                    <span class="flow-arrow">-></span>
+                    <span class="flow-node cycle-node">Stan / Wierzchołek B</span>
+                    <span class="flow-arrow">-></span>
+                    <span class="flow-node cycle-node">Stan / Wierzchołek C</span>
+                    <span class="flow-arrow">-></span>
+                    <span class="flow-node cycle-node">Powrót do A (Zamknięcie cyklu)</span>
+                </div>
+
+                <h4 style="margin-top: 26px;">Sześć głównych cech algorytmu:</h4>
+                <div class="feature-cards-grid">
+                    <div class="feature-item">
+                        <h5>1. Skończoność</h5>
+                        <p>Dla każdego poprawnego zbioru danych wejściowych algorytm musi zakończyć działanie po wykonaniu <strong>skończonej liczby kroków</strong>.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>2. Określoność (Jednoznaczność)</h5>
+                        <p>Każda instrukcja musi być precyzyjna i jednoznaczna – dla tych samych danych wejściowych algorytm deterministyczny zawsze wykona te same kroki.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>3. Masowość (Uniwersalność)</h5>
+                        <p>Algorytm nie rozwiązuje tylko jednego konkretnego przykładu (np. <code>2 + 3</code>), lecz całą klasę zadań danego typu (np. dodawanie dowolnych liczb <code>a + b</code>).</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>4. Efektywność (Wykonalność)</h5>
+                        <p>Każdy krok algorytmu musi składać się z operacji elementarnych, które wykonawca (komputer lub człowiek) potrafi zrealizować w skończonym czasie.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>5. Poprawność</h5>
+                        <p>Po zatrzymaniu się algorytm musi zwracać wynik ściśle zgodny ze specyfikacją problemu dla wszystkich dopuszczalnych danych.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h5>6. Wejście i Wyjście</h5>
+                        <p>Algorytm przyjmuje zero lub więcej określonych danych wejściowych oraz generuje co najmniej jeden jednoznaczny wynik (wyjście).</p>
+                    </div>
+                </div>
+
+                <h4>Główne cechy cyklu:</h4>
+                <div class="feature-cards-grid">
+                    <div class="feature-item cycle-feature">
+                        <h5>1. Powtarzalność (Okresowość)</h5>
+                        <p>Wielokrotne wykonywanie tego samego bloku instrukcji (iteracja) lub cykliczne przechodzenie przez ten sam podzbiór stanów.</p>
+                    </div>
+                    <div class="feature-item cycle-feature">
+                        <h5>2. Zamkniętość (Punkt powrotu)</h5>
+                        <p>Koniec jednego obiegu cyklu łączy się bezpośrednio z jego początkiem – w grafach i algebrze wierzchołek końcowy jest tożsamy ze startowym (<code>v<sub>0</sub> = v<sub>k</sub></code>).</p>
+                    </div>
+                    <div class="feature-item cycle-feature">
+                        <h5>3. Brak wymogu skończoności</h5>
+                        <p>Sam cykl z natury opisuje obieg zamknięty. Aby cykl wykonawczy (pętla) w programie się zatrzymał, musi zostać <strong>przerwany z zewnątrz warunkiem stopu</strong>.</p>
+                    </div>
+                    <div class="feature-item cycle-feature">
+                        <h5>4. Charakter składowy lub strukturalny</h5>
+                        <p>W informatyce cykl nie jest samodzielnym przepisem na rozwiązanie problemu, lecz narzędziem (pętlą w algorytmie), taktem zegara lub strukturą w grafie.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- KARTA 2: PODSTAWOWE RÓŻNICE (TABELA PORÓWNAWCZA) -->
+        <article class="task-card" id="podstawowe-roznice">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>2. Algorytm a cykl – zestawienie podstawowych różnic</h3>
+                    <div class="task-subtitle">Porównanie celów, własności formalnych oraz zachowania w czasie</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Porównanie bezpośrednie</span>
+                </div>
+            </div>
+
+            <div class="task-explanation">
+                <p>Poniższa tabela zestawia najważniejsze kryteria odróżniające <strong>algorytm</strong> od <strong>cyklu</strong> zarówno na poziomie pojęciowym, jak i realizacyjnym:</p>
+
+                <div class="diff-table-wrapper">
+                    <table class="diff-table">
+                        <thead>
+                            <tr>
+                                <th>Kryterium porównania</th>
+                                <th>Algorytm</th>
+                                <th>Cykl</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Istota pojęcia</strong></td>
+                                <td>Kompletny, uporządkowany przepis prowadzący od danych wejściowych do rozwiązania problemu.</td>
+                                <td>Powtarzalny obieg operacji (pętla), zamknięta ścieżka w strukturze lub okresowa zmiana stanów.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cel działania</strong></td>
+                                <td>Osiągnięcie wyniku końcowego i <strong>zatrzymanie się (STOP)</strong>.</td>
+                                <td>Powtarzanie określonego działania lub powrót do elementu początkowego.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Skończoność w czasie</strong></td>
+                                <td><strong>Bezwzględnie wymagana</strong> – procedura, która nigdy się nie kończy, nie jest algorytmem.</td>
+                                <td><strong>Opcjonalna</strong> – cykl może być skończony (np. pętla wykonana <code>n</code> razy) lub nieskończony (np. cykl zegarowy, pętla nieskończona).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kierunek przepływu</strong></td>
+                                <td>Ukierunkowany: od <code>START</code> do <code>STOP</code> (nawet jeśli po drodze zawiera rozgałęzienia i pętle).</td>
+                                <td>Kołowy / zamknięty: ostatni element lub krok prowadzi z powrotem do pierwszego (<code>A -> B -> C -> A</code>).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Relacja: część a całość</strong></td>
+                                <td><strong>Całość (nadrzędna procedura)</strong> – może wykorzystywać wiele cykli (pętli) jako swoje kroki pośrednie.</td>
+                                <td><strong>Część składowa</strong> algorytmu (konstrukcja iteracyjna) albo właściwość badanego obiektu (np. cykl w grafie).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Wpływ błędu zapętlenia</strong></td>
+                                <td>Wpadnięcie w niekontrolowany cykl niszczy cechę skończoności algorytmu (błąd zawieszenia programu).</td>
+                                <td>Brak warunku wyjścia tworzy tzw. <strong>cykl nieskończony</strong> (ang. <em>infinite loop</em>).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
+
+        <!-- KARTA 3: ROZRÓŻNIENIE W INFORMATYCE -->
+        <article class="task-card" id="informatyka">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>3. Rozróżnienie w informatyce</h3>
+                    <div class="task-subtitle">Algorytm jako program obliczeniowy vs cykl jako pętla, cykl rozkazowy CPU oraz cykl w strukturach danych</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-cs">Informatyka</span>
+                </div>
+            </div>
+
+            <div class="task-explanation">
+                <p>W informatyce słowo <strong>algorytm</strong> ma jedno ścisłe znaczenie, natomiast pojęcie <strong>cyklu</strong> występuje w czterech wyraźnie odrębnych kontekstach:</p>
+
+                <ul class="explanation-points">
+                    <li>
+                        <strong>1. Algorytm a cykl wykonawczy (pętla / iteracja):</strong><br>
+                        Zgodnie z twierdzeniem Böhma-Jacopiniego każdy algorytm można zapisać za pomocą trzech podstawowych struktur sterujących: <strong>sekwencji</strong> (ciągu instrukcji), <strong>selekcji</strong> (instrukcji warunkowej <code>if</code>) oraz <strong>iteracji, czyli cyklu</strong> (pętli <code>for</code>, <code>while</code>, <code>do...while</code>). W tym ujęciu cykl jest <em>narzędziem wewnątrz algorytmu</em>, które pozwala wielokrotnie wykonać fragment kodu bez konieczności jego ręcznego powielania.
+                    </li>
+                    <li>
+                        <strong>2. Problem stopu i pętla nieskończona (gdy cykl niszczy algorytm):</strong><br>
+                        Aby pętla mogła być częścią poprawnego algorytmu, w każdym obiegu musi przybliżać program do spełnienia <strong>warunku stopu</strong> (np. zmniejszać resztę w algorytmie Euklidesa). Jeżeli warunek wyjścia nigdy nie zostanie spełniony (np. <code>while (x &gt; 0)</code> przy rosnącym <code>x</code>), powstaje <strong>cykl nieskończony</strong>. Taki kod przestaje spełniać definicję algorytmu, choć w informatyce bywa celowo stosowany w <em>pętlach głównych systemów operacyjnych, serwerów czy silników gier</em> (tzw. <code>event loop</code> / <code>game loop</code>), które działają w cyklu aż do wyłączenia zasilania.
+                    </li>
+                    <li>
+                        <strong>3. Cykl w strukturach danych i systemach operacyjnych (Deadlock):</strong><br>
+                        W strukturach grafowych i listach wskaźnikowych cykl oznacza sytuację, w której podążając po krawędziach lub wskaźnikach <code>next</code>, wracamy do już odwiedzonego węzła. Przeszukiwanie takiej struktury bez pamiętania odwiedzonych wierzchołków wpędza algorytm w nieskończoną pętlę! Z kolei w systemach operacyjnych <strong>cykl w grafie przydziału zasobów</strong> (proces <code>P<sub>1</sub></code> czeka na zasób trzymany przez <code>P<sub>2</sub></code>, a <code>P<sub>2</sub></code> czeka na <code>P<sub>1</sub></code>) oznacza <strong>zakleszczenie (ang. <em>deadlock</em>)</strong>.
+                    </li>
+                    <li>
+                        <strong>4. Cykl rozkazowy procesora (Fetch – Decode – Execute):</strong><br>
+                        W architekturze komputerów procesor (CPU) działa w nieustannym <strong>cyklu maszynowym</strong>: <em>Pobierz rozkaz (Fetch) &rarr; Zdekoduj (Decode) &rarr; Wykonaj (Execute) &rarr; Zapisz wynik (Store)</em>. Pojedynczy algorytm napisany przez programistę zostaje wykonany dzięki tysiącom lub miliardom takich elementarnych cykli zegarowych procesora.
+                    </li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- KARTA 4: ROZRÓŻNIENIE W MATEMATYCE -->
+        <article class="task-card" id="matematyka">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>4. Rozróżnienie w matematyce</h3>
+                    <div class="task-subtitle">Konstruktywne procedury obliczeniowe vs cykle w teorii grafów, algebrze i układach dynamicznych</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-math">Matematyka</span>
+                </div>
+            </div>
+
+            <div class="task-explanation">
+                <p>W matematyce rozróżnienie między algorytmem a cyklem przebiega na linii <strong>procedura obliczeniowa (metoda)</strong> a <strong>obiekt / struktura matematyczna</strong>:</p>
+
+                <ul class="explanation-points">
+                    <li>
+                        <strong>1. Algorytm w matematyce (metoda konstruktywna):</strong><br>
+                        W matematyce algorytm to sformalizowana procedura przekształcająca dane wejściowe w wynik w skończonej liczbie kroków (formalizowana m.in. przez <em>Maszynę Turinga</em> lub <em>funkcje rekurencyjne</em>). Klasyczne przykłady to <strong>Algorytm Euklidesa</strong> (wyznaczanie <code>NWD(a, b)</code>), <strong>Sito Eratostenesa</strong> (wyznaczanie liczb pierwszych), <strong>eliminacja Gaussa</strong> (rozwiązywanie układów równań liniowych) czy <strong>metoda Newtona-Raphsona</strong>.
+                    </li>
+                    <li>
+                        <strong>2. Cykl w teorii grafów (droga zamknięta):</strong><br>
+                        W teorii grafów cykl to <strong>zamknięta ścieżka</strong> <code>C = (v<sub>0</sub>, v<sub>1</sub>, ..., v<sub>k</sub>)</code>, w której wierzchołek początkowy pokrywa się z końcowym (<code>v<sub>0</sub> = v<sub>k</sub></code>, gdzie <code>k &ge; 3</code> dla grafów prostych), a wszystkie krawędzie i pozostałe wierzchołki są parami różne.
+                        <br>– <strong>Cykl Eulera:</strong> cykl przechodzący przez <em>każdą krawędź</em> grafu dokładnie jeden raz.
+                        <br>– <strong>Cykl Hamiltona:</strong> cykl przechodzący przez <em>każdy wierzchołek</em> grafu dokładnie jeden raz.
+                        <br>– Graf spójny, który <strong>nie zawiera żadnego cyklu</strong> (jest acykliczny), nazywamy w matematyce i informatyce <strong>drzewem</strong>.
+                    </li>
+                    <li>
+                        <strong>3. Cykl w algebrze (permutacja cykliczna w teorii grup):</strong><br>
+                        W algebrze cykl długości <code>k</code> (nazywany <code>k</code>-cyklem i zapisywany jako <code>(a<sub>1</sub> a<sub>2</sub> ... a<sub>k</sub>)</code>) to szczególny rodzaj <strong>permutacji zbioru</strong>, która cyklicznie przesuwa wybrane elementy w zamkniętym kręgu:
+                        <div class="flow-diagram-box" style="margin: 10px 0;">
+                            <span class="flow-node cycle-node">a<sub>1</sub> -> a<sub>2</sub></span>
+                            <span class="flow-arrow">-></span>
+                            <span class="flow-node cycle-node">a<sub>2</sub> -> a<sub>3</sub></span>
+                            <span class="flow-arrow">-></span>
+                            <span class="flow-node cycle-node">...</span>
+                            <span class="flow-arrow">-></span>
+                            <span class="flow-node cycle-node">a<sub>k</sub> -> a<sub>1</sub></span>
+                        </div>
+                        pozostawiając wszystkie inne elementy zbioru na swoich miejscach. Fundamentalne twierdzenie algebry permutacji mówi, że <em>każdą permutację skończonego zbioru można jednoznacznie rozłożyć na iloczyn cykli rozłącznych</em> (a rozkład ten wyznacza się za pomocą odpowiedniego algorytmu!).
+                    </li>
+                    <li>
+                        <strong>4. Cykl w układach dynamicznych i teorii liczb (orbita okresowa):</strong><br>
+                        Podczas iterowania funkcji matematycznej <code>x<sub>n+1</sub> = f(x<sub>n</sub>)</code> ciąg wartości wpada w <strong>cykl okresowy</strong> o okresie <code>p</code>, jeśli po <code>p</code> krokach wartość powraca do stanu wyjściowego: <code>x<sub>n+p</sub> = x<sub>n</sub></code>. Słynnym przykładem jest <strong>problem Collatza (<code>3n + 1</code>)</strong>: dla dowolnej liczby startowej ciąg wpada w zamknięty cykl <code>4 &rarr; 2 &rarr; 1 &rarr; 4 &rarr; 2 &rarr; 1 ...</code>. Dopiero dodanie warunku stopu „zatrzymaj się, gdy osiągniesz <code>1</code>” zamienia nieskończony cykl matematyczny w kończący się algorytm.
+                    </li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Powrót na górę -->
+        <div class="back-to-top">
+            <a href="#">Wróć na początek strony</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Polina Bohomol uczeń ZSK klasa 3b</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

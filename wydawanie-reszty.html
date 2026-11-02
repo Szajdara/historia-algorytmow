@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorytm zachłanny – Wydawanie reszty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteka Skulpt do uruchamiania kodu Python w przeglądarce -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+</head>
+
+<body>
+
+    <canvas id="confetti"></canvas>
+
+    <header>
+        <h1>Wydawanie reszty</h1>
+        <h2>Algorytm zachłanny – od opisu do C++ i C#</h2>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link"> Oś czasu historii</a>
+            <a href="zadania.html" class="nav-link"> Zadania z podręcznika</a>
+            <a href="wydawanie-reszty.html" class="nav-link active"> Wydawanie reszty</a>
+            <a href="algorytm-a-cykl.html" class="nav-link"> Algorytm a cykl</a>
+        </nav>
+    </header>
+
+    <section class="intro-section">
+        <div class="intro-box">
+            <h3>CZYM JEST ALGORYTM ZACHŁANNY?</h3>
+            <p>Algorytm zachłanny charakteryzuje się tym, że w celu wyznaczenia rozwiązania w każdym kroku dokonuje <strong>zachłannego, tj. najlepszego w danym momencie wyboru</strong>, wyboru rozwiązania podproblemu. Nie cofa podjętych wcześniej decyzji, lecz wybiera lokalnie najkorzystniejszą opcję.</p>
+        </div>
+        <div class="intro-box">
+            <h3>POLECENIE ZADANIA</h3>
+            <p>Zadanie wykonaj każdym typem algorytmu począwszy od <strong>opisowego</strong> przez <strong>pseudokod</strong>, <strong>C++</strong> i <strong>C#</strong>.<br><br>
+            <strong>Problem:</strong> Jak dostępnymi monetami (<strong>1, 2, 5</strong>) wydać resztę w taki sposób, by użyć ich jak najmniej? Jakie będzie rozwiązanie dla reszty <strong>6</strong>, a jakie dla <strong>13</strong>?</p>
+        </div>
+    </section>
+
+    <main class="tasks-container">
+
+        <!-- KARTA 1: WIZUALIZACJA PROBLEMU I ROZWIĄZANIE DLA 6 ORAZ 13 -->
+        <article class="task-card" id="wizualizacja">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>Analiza problemu: Reszta 6 oraz Reszta 13</h3>
+                    <div class="task-subtitle">Porównanie sposobów wydawania reszty dla nominałów {1, 2, 5}</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Metoda zachłanna</span>
+                </div>
+            </div>
+
+            <div class="task-statement">
+                <h4>Problem:</h4>
+                <p>„Jak dostępnymi monetami wydać resztę w taki sposób, by użyć ich jak najmniej.<br>
+                Jakie będzie rozwiązanie dla reszty 6, a jakie dla 13?”</p>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Dostępne nominały monet:</h4>
+                <div class="coins-showcase">
+                    <div class="coin coin-1" title="Moneta o nominale 1">1</div>
+                    <div class="coin coin-2" title="Moneta o nominale 2">2</div>
+                    <div class="coin coin-5" title="Moneta o nominale 5">5</div>
+                </div>
+
+                <p>Poniższe zestawienie prezentuje różne kombinacje monet dające sumę <strong>6</strong> oraz <strong>13</strong>. Algorytm zachłanny w każdym kroku wybiera <strong>największy możliwy nominał</strong> nieprzekraczający pozostałej kwoty, dzięki czemu od razu znajduje wariant z najmniejszą liczbą monet:</p>
+
+                <div class="comparison-grid">
+                    <!-- Kolumna: RESZTA 6 -->
+                    <div class="comparison-col">
+                        <h4>RESZTA 6</h4>
+
+                        <div class="coin-variant">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                            </div>
+                            <span class="coin-count-label">6 monet</span>
+                        </div>
+
+                        <div class="coin-variant">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                            </div>
+                            <span class="coin-count-label">5 monet</span>
+                        </div>
+
+                        <div class="coin-variant">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                            </div>
+                            <span class="coin-count-label">3 monety</span>
+                        </div>
+
+                        <div class="coin-variant optimal">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-5">5</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                            </div>
+                            <span class="coin-count-label">2 monety (Rozwiązanie zachłanne: 5 + 1)</span>
+                        </div>
+                    </div>
+
+                    <!-- Kolumna: RESZTA 13 -->
+                    <div class="comparison-col">
+                        <h4>RESZTA 13</h4>
+
+                        <div class="coin-variant">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                            </div>
+                            <span class="coin-count-label">13 monet</span>
+                        </div>
+
+                        <div class="coin-variant">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                            </div>
+                            <span class="coin-count-label">7 monet</span>
+                        </div>
+
+                        <div class="coin-variant">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-5">5</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                            </div>
+                            <span class="coin-count-label">5 monet</span>
+                        </div>
+
+                        <div class="coin-variant optimal">
+                            <div class="coin-row">
+                                <span class="coin coin-sm coin-5">5</span>
+                                <span class="coin coin-sm coin-5">5</span>
+                                <span class="coin coin-sm coin-2">2</span>
+                                <span class="coin coin-sm coin-1">1</span>
+                            </div>
+                            <span class="coin-count-label">4 monety (Rozwiązanie zachłanne: 5 + 5 + 2 + 1)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="margin-top: 26px;">Odpowiedź na pytanie z zadania:</h4>
+                <ul class="explanation-points">
+                    <li><strong>Dla reszty 6:</strong> Algorytm najpierw wybiera największą możliwą monetę &le; 6, czyli <strong>5</strong> (zostaje <code>6 - 5 = 1</code>), a następnie monetę <strong>1</strong> (zostaje <code>1 - 1 = 0</code>). Rozwiązanie to <strong>2 monety: 5 oraz 1</strong>.</li>
+                    <li><strong>Dla reszty 13:</strong> Algorytm wybiera kolejno: <strong>5</strong> (zostaje <code>13 - 5 = 8</code>), znów <strong>5</strong> (zostaje <code>8 - 5 = 3</code>), następnie <strong>2</strong> (zostaje <code>3 - 2 = 1</code>) oraz <strong>1</strong> (zostaje <code>1 - 1 = 0</code>). Rozwiązanie to <strong>4 monety: 5, 5, 2 oraz 1</strong>.</li>
+                </ul>
+
+                <!-- Interaktywny symulator wydawania reszty -->
+                <div class="interactive-calc">
+                    <h4>Interaktywny symulator wydawania reszty (nominały: 5, 2, 1)</h4>
+                    <div class="calc-controls">
+                        <input type="number" id="kwotaInput" class="calc-input" value="13" min="1" max="500" />
+                        <button class="calc-btn" onclick="obliczReszte()">Wydaj resztę</button>
+                    </div>
+                    <div id="calcResult" class="calc-result"></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- KARTA 2: 1. ALGORYTM OPISOWY -->
+        <article class="task-card" id="algorytm-opisowy">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>1. Algorytm opisowy (lista kroków)</h3>
+                    <div class="task-subtitle">Specyfikacja problemu oraz słowny zapis kolejnych kroków</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Typ 1: Opisowy</span>
+                </div>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Specyfikacja zadania:</h4>
+                <ul class="explanation-points">
+                    <li><strong>Dane wejściowe:</strong> Liczba całkowita dodatnia <code>R</code> oznaczająca kwotę reszty do wydania (<code>R &gt; 0</code>) oraz uporządkowana malejąco tablica dostępnych nominałów monet <code>M = [5, 2, 1]</code>.</li>
+                    <li><strong>Wynik:</strong> Wykaz wydanych monet (oraz ich łączna liczba), których suma jest równa <code>R</code>, przy użyciu minimalnej liczby monet.</li>
+                </ul>
+
+                <h4>Lista kroków algorytmu:</h4>
+                <ol class="step-list">
+                    <li>Wczytaj kwotę reszty do wydania <code>R</code> oraz przygotuj tablicę dostępnych nominałów uporządkowaną malejąco: <code>M = [5, 2, 1]</code>.</li>
+                    <li>Ustaw licznik wydanych monet <code>liczba_monet := 0</code> oraz indeks aktualnie rozpatrywanego nominału <code>i := 0</code> (zaczynamy od największego nominału, czyli 5).</li>
+                    <li>Dopóki pozostała kwota reszty <code>R &gt; 0</code>, wykonuj kroki 4–5. Gdy <code>R = 0</code>, przejdź do kroku 6.</li>
+                    <li>Sprawdź, czy aktualny nominał mieści się w pozostałej reszcie (czy <code>R &ge; M[i]</code>):
+                        <br>– <strong>Jeśli TAK:</strong> wydaj monetę o nominale <code>M[i]</code>, zmniejsz pozostałą resztę o wartość tej monety (<code>R := R - M[i]</code>) i zwiększ licznik wydanych monet o 1 (<code>liczba_monet := liczba_monet + 1</code>).
+                        <br>– <strong>Jeśli NIE:</strong> przejdź do kolejnego, mniejszego nominału, zwiększając indeks o 1 (<code>i := i + 1</code>).</li>
+                    <li>Wróć do sprawdzenia warunku pętli w kroku 3.</li>
+                    <li>Wypisz wszystkie wydane monety oraz ich łączną liczbę <code>liczba_monet</code> i zakończ działanie algorytmu.</li>
+                </ol>
+            </div>
+        </article>
+
+        <!-- KARTA 3: 2. PSEUDOKOD -->
+        <article class="task-card" id="pseudokod">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>2. Pseudokod</h3>
+                    <div class="task-subtitle">Formalny zapis algorytmu zachłannego wydawania reszty</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Typ 2: Pseudokod</span>
+                </div>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Wersja A (odejmowanie pojedynczych monet) oraz Wersja B (z dzieleniem całkowitym div / mod):</h4>
+                <p>W zapisie pseudokodu możemy odejmować nominał w pętli tak długo, aż reszta spadnie poniżej wartości monety, lub od razu wyznaczyć krotność monety operacją dzielenia całkowitego <code>div</code>:</p>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="pseudo1" onclick="switchTab('pseudokod', 'pseudo1')">Pseudokod (wersja z odejmowaniem)</button>
+                        <button class="tab-btn" data-lang="pseudo2" onclick="switchTab('pseudokod', 'pseudo2')">Pseudokod (wersja z dzieleniem div/mod)</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <div class="code-pane active" data-lang="pseudo1">
+                        <pre><code>Algorytm WydawanieReszty(R)
+    Dane:
+        R — kwota reszty do wydania (liczba całkowita dodatnia)
+        M[1..3] = [5, 2, 1] — tablica nominałów uporządkowana malejąco
+    Wynik:
+        Wypisane nominały wydanych monet oraz ich łączna liczba
+
+Początek
+    liczba_monet := 0
+    i := 1
+
+    dopóki R &gt; 0 wykonuj
+        jeżeli R &gt;= M[i] to
+            wypisz M[i]
+            R := R - M[i]
+            liczba_monet := liczba_monet + 1
+        w przeciwnym razie
+            i := i + 1
+
+    wypisz "Liczba monet: ", liczba_monet
+Koniec</code></pre>
+                    </div>
+                    <div class="code-pane" data-lang="pseudo2">
+                        <pre><code>Algorytm WydawanieResztyOptymalny(R)
+    Dane:
+        R — kwota reszty do wydania (liczba całkowita dodatnia)
+        M[1..3] = [5, 2, 1] — tablica nominałów uporządkowana malejąco
+    Wynik:
+        Krotności poszczególnych nominałów oraz łączna liczba monet
+
+Początek
+    liczba_monet := 0
+    i := 1
+
+    dopóki R &gt; 0 wykonuj
+        jeżeli R &gt;= M[i] to
+            ile := R div M[i]
+            wypisz "Nominał ", M[i], " x ", ile
+            R := R mod M[i]
+            liczba_monet := liczba_monet + ile
+        i := i + 1
+
+    wypisz "Łączna liczba monet: ", liczba_monet
+Koniec</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- KARTA 4: 3. C++, 4. C# ORAZ PYTHON -->
+        <article class="task-card" id="implementacje">
+            <div class="task-header">
+                <div class="task-title-group">
+                    <h3>3. Implementacja w C++, C# oraz Pythonie</h3>
+                    <div class="task-subtitle">Gotowe programy obliczające wydawanie reszty dla 6, 13 oraz dowolnej kwoty</div>
+                </div>
+                <div class="task-badges">
+                    <span class="badge badge-book">Typ 3 i 4: C++ / C#</span>
+                </div>
+            </div>
+
+            <div class="task-explanation">
+                <h4>Porównanie implementacji:</h4>
+                <p>Poniżej znajdują się kompletne programy w językach <strong>C++</strong> oraz <strong>C#</strong> (a także w <strong>Pythonie</strong> do przetestowania na żywo w przeglądarce). Każdy program realizuje algorytm zachłanny dla nominałów <code>{5, 2, 1}</code> i prezentuje rozwiązanie dla reszty <strong>6</strong> oraz <strong>13</strong>.</p>
+                <div class="complexity-container">
+                    <div class="complexity-box"><strong>Złożoność czasowa:</strong> <code>O(k)</code>, gdzie <code>k</code> to liczba dostępnych nominałów (przy użyciu dzielenia) lub <code>O(R)</code> (przy odejmowaniu pojedynczych monet)</div>
+                    <div class="complexity-box"><strong>Złożoność pamięciowa:</strong> <code>O(1)</code> dodatkowej pamięci.</div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-tabs-header">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-lang="cpp" onclick="switchTab('implementacje', 'cpp')">C++</button>
+                        <button class="tab-btn" data-lang="csharp" onclick="switchTab('implementacje', 'csharp')">C#</button>
+                        <button class="tab-btn" data-lang="py" onclick="switchTab('implementacje', 'py')">Python</button>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn" onclick="openEditor('wydawanie_reszty')"> Wypróbuj w edytorze</button>
+                    </div>
+                </div>
+                <div class="code-box">
+                    <!-- C++ -->
+                    <div class="code-pane active" data-lang="cpp">
+                        <pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+void wydajReszte(int kwota)
+{
+    int nominaly[3] = {5, 2, 1};
+    int liczbaMonet = 0;
+    int pozostalo = kwota;
+    int i = 0;
+
+    cout &lt;&lt; "Reszta do wydania: " &lt;&lt; kwota &lt;&lt; endl;
+    cout &lt;&lt; "Wydane monety: ";
+
+    while (pozostalo &gt; 0 &amp;&amp; i &lt; 3)
+    {
+        if (pozostalo &gt;= nominaly[i])
+        {
+            int ile = pozostalo / nominaly[i];
+            for (int j = 0; j &lt; ile; j++)
+            {
+                cout &lt;&lt; nominaly[i] &lt;&lt; " ";
+            }
+            pozostalo = pozostalo % nominaly[i];
+            liczbaMonet += ile;
+        }
+        i++;
+    }
+
+    cout &lt;&lt; "\nLaczna liczba monet: " &lt;&lt; liczbaMonet &lt;&lt; "\n" &lt;&lt; endl;
+}
+
+int main()
+{
+    // Rozwiazanie dla reszty 6 oraz 13
+    wydajReszte(6);
+    wydajReszte(13);
+
+    return 0;
+}</code></pre>
+                    </div>
+
+                    <!-- C# -->
+                    <div class="code-pane" data-lang="csharp">
+                        <pre><code>using System;
+
+class Program
+{
+    static void WydajReszte(int kwota)
+    {
+        int[] nominaly = { 5, 2, 1 };
+        int liczbaMonet = 0;
+        int pozostalo = kwota;
+        int i = 0;
+
+        Console.WriteLine($"Reszta do wydania: {kwota}");
+        Console.Write("Wydane monety: ");
+
+        while (pozostalo &gt; 0 &amp;&amp; i &lt; nominaly.Length)
+        {
+            if (pozostalo &gt;= nominaly[i])
+            {
+                int ile = pozostalo / nominaly[i];
+                for (int j = 0; j &lt; ile; j++)
+                {
+                    Console.Write(nominaly[i] + " ");
+                }
+                pozostalo = pozostalo % nominaly[i];
+                liczbaMonet += ile;
+            }
+            i++;
+        }
+
+        Console.WriteLine($"\nŁączna liczba monet: {liczbaMonet}\n");
+    }
+
+    static void Main(string[] args)
+    {
+        // Rozwiązanie dla reszty 6 oraz 13
+        WydajReszte(6);
+        WydajReszte(13);
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- Python -->
+                    <div class="code-pane" data-lang="py">
+                        <pre><code>def wydaj_reszte(kwota, nominaly=[5, 2, 1]):
+    wydane_monety = []
+    pozostalo = kwota
+    i = 0
+
+    while pozostalo > 0 and i < len(nominaly):
+        if pozostalo >= nominaly[i]:
+            ile = pozostalo // nominaly[i]
+            for _ in range(ile):
+                wydane_monety.append(nominaly[i])
+            pozostalo = pozostalo % nominaly[i]
+        i += 1
+
+    return wydane_monety
+
+for kwota in [6, 13]:
+    monety = wydaj_reszte(kwota)
+    print(f"Reszta {kwota}: monety {monety} -> {len(monety)} szt.")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Powrót na górę -->
+        <div class="back-to-top">
+            <a href="#">Wróć na początek strony</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Polina Bohomol uczeń ZSK klasa 3b</p>
+    </footer>
+
+    <!-- Modalny edytor z silnikiem Skulpt -->
+    <div id="editorModal">
+        <div class="editor-container">
+            <div class="editor-toolbar">
+                <button class="run-btn" onclick="runPython()">Run ❯</button>
+                <button class="close-btn" onclick="closeEditor()">Zamknij</button>
+            </div>
+
+            <div class="editor-workarea">
+                <div class="code-panel">
+                    <textarea id="pythonCode"># Wczytywanie kodu...</textarea>
+                </div>
+                <div class="output-panel">
+                    <pre id="pythonOutput">Kliknij "Run", aby zobaczyć wynik...</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function ustawKwote(k) {
+            document.getElementById('kwotaInput').value = k;
+            obliczReszte();
+        }
+
+        function obliczReszte() {
+            const input = document.getElementById('kwotaInput');
+            const resultDiv = document.getElementById('calcResult');
+            let kwota = parseInt(input.value, 10);
+
+            if (isNaN(kwota) || kwota <= 0) {
+                resultDiv.innerHTML = '<p style="color: #fca5a5;">Podaj dodatnią liczbę całkowitą!</p>';
+                return;
+            }
+            if (kwota > 500) {
+                kwota = 500;
+                input.value = 500;
+            }
+
+            const nominaly = [5, 2, 1];
+            const monety = [];
+            let pozostalo = kwota;
+
+            for (let nom of nominaly) {
+                while (pozostalo >= nom) {
+                    monety.push(nom);
+                    pozostalo -= nom;
+                }
+            }
+
+            const coinsHtml = monety.map(m => `<span class="coin coin-sm coin-${m}">${m}</span>`).join('');
+            const sumaTekst = monety.join(' + ');
+
+            resultDiv.innerHTML = `
+                <div class="coin-row" style="margin-bottom: 12px;">${coinsHtml}</div>
+                <p style="font-weight: 700; color: #6ee7b7; font-size: 1rem;">
+                    Rozwiązanie dla reszty ${kwota}: użyto ${monety.length} ${monety.length === 1 ? 'monety' : (monety.length < 5 ? 'monet(y)' : 'monet')} (${sumaTekst})
+                </p>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', obliczReszte);
+    </script>
+</body>
+
+</html>
